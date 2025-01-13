@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "oneOf": [
+      {
+        "type": "array",
+        "items": [
+          {
+            "type": "boolean",
+            "description": "応答するかどうかを示すフラグ。trueなら応答、falseなら応答しない。"
+          },
+          {
+            "type": "string",
+            "description": "応答に使用するモデル名。応答しなくてもモデル名を考えて指定します。"
+          }
+        ],
+        "minItems": 2,
+        "maxItems": 2,
+        "example": [
+          true,
+          "gpt-3.5-turbo"
+        ]
+      },
+      {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "応答を生成するエージェントの名前"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "応答が生成された日時 (ISO 8601形式)"
+          },
+          "message_id": {
+            "type": "integer",
+            "description": "応答メッセージの一意の識別子"
+          },
+          "reply_to": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "リプライ対象のメッセージID (リプライがない場合はnull)"
+          },
+          "content": {
+            "type": "string",
+            "description": "応答の本文"
+          }
+        },
+        "required": [
+          "user",
+          "time",
+          "message_id",
+          "content"
+        ],
+        "additionalProperties": false
+      }
+    ]
+  }
+  
